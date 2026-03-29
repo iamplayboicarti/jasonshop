@@ -1,0 +1,197 @@
+@use '../../styles/shared-styles.scss' as *;
+
+.order-detail-page {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+// ── Status Badge ───────────────────────────────────────────
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.875rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: capitalize;
+
+    &.status-pending {
+        background: #FEF3C7;
+        color: #92400E;
+    }
+
+    &.status-processing {
+        background: #DBEAFE;
+        color: #1E40AF;
+    }
+
+    &.status-shipped {
+        background: #EDE9FE;
+        color: #5B21B6;
+    }
+
+    &.status-delivered {
+        background: #D1FAE5;
+        color: #065F46;
+    }
+
+    &.status-cancelled {
+        background: #FEE2E2;
+        color: #991B1B;
+    }
+}
+
+// ── Info Card ──────────────────────────────────────────────
+.info-card {
+    background: $bg-card;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: $shadow-sm;
+    border: 1px solid $border-color;
+    height: 100%;
+}
+
+.info-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.875rem;
+    border-bottom: 1px solid $border-color;
+
+    i {
+        color: $primary;
+    }
+}
+
+// ── Info List ──────────────────────────────────────────────
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+.info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.info-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $text-muted;
+    min-width: 130px;
+    flex-shrink: 0;
+
+    i {
+        width: 14px;
+        color: $primary;
+    }
+}
+
+.info-value {
+    font-size: 0.875rem;
+    color: $text-primary;
+    font-weight: 500;
+}
+
+// ── Order Table ────────────────────────────────────────────
+.order-table {
+    font-size: 0.85rem;
+    margin-bottom: 0;
+
+    thead th {
+        background: $bg-body;
+        color: $text-secondary;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0.6rem 0.75rem;
+        border-bottom: 1px solid $border-color;
+        text-align: center;
+    }
+
+    thead th:first-child {
+        text-align: left;
+    }
+
+    tbody td {
+        vertical-align: middle;
+        padding: 0.75rem;
+        border-color: $border-color;
+        text-align: center;
+        color: $text-primary;
+    }
+
+    tbody td:first-child {
+        text-align: left;
+    }
+
+    tbody tr:hover {
+        background: $bg-body;
+    }
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.product-image {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid $border-color;
+    flex-shrink: 0;
+}
+
+.product-name {
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: $text-primary;
+    line-height: 1.4;
+    max-width: 180px;
+}
+
+// ── Order Total ────────────────────────────────────────────
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0;
+    border-top: 1px solid $border-color;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    color: $text-primary;
+    font-size: 0.95rem;
+}
+
+.total-value {
+    font-size: 1.25rem;
+    color: $primary;
+    font-weight: 800;
+}
+
+// ── Responsive ─────────────────────────────────────────────
+@media (max-width: 767px) {
+    .info-label {
+        min-width: 100px;
+    }
+
+    .product-name {
+        max-width: 120px;
+    }
+}

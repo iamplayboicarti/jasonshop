@@ -1,0 +1,148 @@
+<app-header></app-header>
+
+<div class="container profile-page">
+
+    <div class="page-header">
+        <h2>Tài khoản của tôi</h2>
+        <nav class="breadcrumb-nav">
+            <a routerLink="/">Trang chủ</a>
+            <span class="separator">/</span>
+            <span>Hồ sơ cá nhân</span>
+        </nav>
+    </div>
+
+    <form [formGroup]="userProfileForm">
+        <div class="row g-4 justify-content-center">
+
+            <!-- Avatar + Summary -->
+            <div class="col-lg-3 col-md-4">
+                <div class="profile-sidebar">
+                    <div class="avatar-circle">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <p class="profile-name">{{ userProfileForm.get('fullname')?.value || 'Người dùng' }}</p>
+                    <p class="profile-sub">Thành viên JasonShop</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-num">0</span>
+                            <span class="stat-label">Đơn hàng</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-num">0</span>
+                            <span class="stat-label">Đánh giá</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form cards -->
+            <div class="col-lg-7 col-md-8">
+                <div class="d-flex flex-column gap-4">
+
+                    <!-- Card 1: Thông tin cá nhân -->
+                    <div class="profile-card">
+                        <div class="profile-card-title">
+                            <i class="fas fa-id-card"></i>
+                            <span>Thông tin cá nhân</span>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="fullname" class="form-label">Họ và tên</label>
+                                <div class="input-icon-wrap">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text"
+                                        formControlName="fullname"
+                                        class="form-control profile-input"
+                                        id="fullname"
+                                        placeholder="Nhập họ và tên"
+                                        [class.is-invalid]="userProfileForm.get('fullname')!.invalid && userProfileForm.get('fullname')!.touched">
+                                </div>
+                                @if(userProfileForm.get('fullname')!.invalid && userProfileForm.get('fullname')!.touched) {
+                                    <div class="invalid-feedback">Họ và tên là trường bắt buộc.</div>
+                                }
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="address" class="form-label">Địa chỉ</label>
+                                <div class="input-icon-wrap">
+                                    <i class="fas fa-map-marker-alt input-icon"></i>
+                                    <input type="text"
+                                        formControlName="address"
+                                        class="form-control profile-input"
+                                        id="address"
+                                        placeholder="Địa chỉ của bạn"
+                                        [class.is-invalid]="userProfileForm.get('address')!.invalid && userProfileForm.get('address')!.touched">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="date_of_birth" class="form-label">Ngày sinh</label>
+                                <div class="input-icon-wrap">
+                                    <i class="fas fa-calendar input-icon"></i>
+                                    <input type="date"
+                                        formControlName="date_of_birth"
+                                        class="form-control profile-input"
+                                        id="date_of_birth">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Bảo mật -->
+                    <div class="profile-card">
+                        <div class="profile-card-title">
+                            <i class="fas fa-lock"></i>
+                            <span>Đổi mật khẩu</span>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="password" class="form-label">Mật khẩu mới</label>
+                                <div class="input-icon-wrap">
+                                    <i class="fas fa-key input-icon"></i>
+                                    <input type="password"
+                                        class="form-control profile-input"
+                                        formControlName="password"
+                                        placeholder="Nhập mật khẩu mới"
+                                        id="password"
+                                        [class.is-invalid]="userProfileForm.get('password')!.invalid && userProfileForm.get('password')!.touched">
+                                </div>
+                                @if(userProfileForm.get('password')!.invalid && userProfileForm.get('password')!.touched) {
+                                    <div class="invalid-feedback">Mật khẩu ít nhất 3 ký tự.</div>
+                                }
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="retype_password" class="form-label">Nhập lại mật khẩu</label>
+                                <div class="input-icon-wrap">
+                                    <i class="fas fa-key input-icon"></i>
+                                    <input type="password"
+                                        class="form-control profile-input"
+                                        formControlName="retype_password"
+                                        placeholder="Nhập lại mật khẩu"
+                                        id="retype_password"
+                                        [class.is-invalid]="userProfileForm.get('retype_password')!.invalid && userProfileForm.get('retype_password')!.touched">
+                                </div>
+                                @if(userProfileForm.hasError('passwordMismatch')) {
+                                    <div class="invalid-feedback d-block">Mật khẩu không khớp.</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="text-end">
+                        <button type="button" (click)="save()" class="btn-save">
+                            <i class="fas fa-save me-2"></i>Lưu thay đổi
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<app-footer></app-footer>

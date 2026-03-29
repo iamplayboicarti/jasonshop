@@ -1,0 +1,246 @@
+<app-header></app-header>
+
+<div class="container checkout-page">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h2>Thanh toán</h2>
+        <nav class="breadcrumb-nav">
+            <a routerLink="/">Trang chủ</a>
+            <span class="separator">/</span>
+            <span>Giỏ hàng</span>
+            <span class="separator">/</span>
+            <span>Thanh toán</span>
+        </nav>
+    </div>
+
+    <form [formGroup]="orderForm">
+        <div class="row g-4">
+
+            <!-- CỘT TRÁI: Thông tin người nhận -->
+            <div class="col-lg-6">
+                <div class="checkout-card">
+                    <div class="card-section-title">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Thông tin người nhận</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fullname" class="form-label">Họ và tên</label>
+                        <input type="text"
+                            formControlName="fullname"
+                            class="form-control checkout-input"
+                            id="fullname"
+                            placeholder="Nhập họ và tên"
+                            [class.is-invalid]="orderForm.get('fullname')!.invalid && orderForm.get('fullname')!.touched">
+                        @if(orderForm.get('fullname')!.invalid && orderForm.get('fullname')!.touched) {
+                            <div class="invalid-feedback">Họ và tên là trường bắt buộc.</div>
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text"
+                            formControlName="email"
+                            class="form-control checkout-input"
+                            id="email"
+                            placeholder="example@email.com"
+                            [class.is-invalid]="orderForm.get('email')!.invalid && orderForm.get('email')!.touched">
+                        @if(orderForm.get('email')!.invalid && orderForm.get('email')!.touched) {
+                            <div class="invalid-feedback">
+                                {{ orderForm.get('email')!.hasError('email') ? 'Email không hợp lệ' : 'Email là trường bắt buộc' }}
+                            </div>
+                        }
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input type="text"
+                                class="form-control checkout-input"
+                                formControlName="phone_number"
+                                placeholder="0912 345 678"
+                                id="phone"
+                                [class.is-invalid]="orderForm.get('phone_number')!.invalid && orderForm.get('phone_number')!.touched">
+                            @if(orderForm.get('phone_number')!.invalid && orderForm.get('phone_number')!.touched) {
+                                <div class="invalid-feedback">Số điện thoại bắt buộc (ít nhất 6 ký tự).</div>
+                            }
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address" class="form-label">Địa chỉ</label>
+                            <input type="text"
+                                class="form-control checkout-input"
+                                formControlName="address"
+                                placeholder="Địa chỉ giao hàng"
+                                id="address"
+                                [class.is-invalid]="orderForm.get('address')!.invalid && orderForm.get('address')!.touched">
+                            @if(orderForm.get('address')!.invalid && orderForm.get('address')!.touched) {
+                                <div class="invalid-feedback">Địa chỉ bắt buộc (ít nhất 5 ký tự).</div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="note" class="form-label">Ghi chú đơn hàng</label>
+                        <input type="text"
+                            class="form-control checkout-input"
+                            formControlName="note"
+                            placeholder="Ghi chú cho người giao hàng (tùy chọn)"
+                            id="note">
+                    </div>
+
+                    <!-- Phương thức vận chuyển -->
+                    <div class="mb-3">
+                        <label class="form-label">Phương thức vận chuyển</label>
+                        <div class="radio-card-group">
+                            <label class="radio-card"
+                                [class.selected]="orderForm.get('shipping_method')?.value === 'express'">
+                                <input type="radio" formControlName="shipping_method" value="express">
+                                <div class="radio-card-body">
+                                    <i class="fas fa-rocket radio-icon"></i>
+                                    <div>
+                                        <div class="radio-title">Nhanh (Express)</div>
+                                        <div class="radio-desc">Giao trong 1–2 ngày</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="radio-card"
+                                [class.selected]="orderForm.get('shipping_method')?.value === 'normal'">
+                                <input type="radio" formControlName="shipping_method" value="normal">
+                                <div class="radio-card-body">
+                                    <i class="fas fa-truck radio-icon"></i>
+                                    <div>
+                                        <div class="radio-title">Tiêu chuẩn</div>
+                                        <div class="radio-desc">Giao trong 3–5 ngày</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Phương thức thanh toán -->
+                    <div class="mb-0">
+                        <label class="form-label">Phương thức thanh toán</label>
+                        <div class="radio-card-group">
+                            <label class="radio-card"
+                                [class.selected]="orderForm.get('payment_method')?.value === 'cod'">
+                                <input type="radio" formControlName="payment_method" value="cod">
+                                <div class="radio-card-body">
+                                    <i class="fas fa-money-bill-wave radio-icon"></i>
+                                    <div>
+                                        <div class="radio-title">COD</div>
+                                        <div class="radio-desc">Thanh toán khi nhận hàng</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="radio-card"
+                                [class.selected]="orderForm.get('payment_method')?.value === 'vnpay'">
+                                <input type="radio" formControlName="payment_method" value="vnpay">
+                                <div class="radio-card-body">
+                                    <i class="fas fa-credit-card radio-icon"></i>
+                                    <div>
+                                        <div class="radio-title">VNPAY</div>
+                                        <div class="radio-desc">Thanh toán trực tuyến</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CỘT PHẢI: Giỏ hàng & Tổng kết -->
+            <div class="col-lg-6">
+                <div class="checkout-card">
+                    <div class="card-section-title">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Sản phẩm đã chọn</span>
+                    </div>
+
+                    <table class="table order-table">
+                        <thead>
+                            <tr>
+                                <th class="text-start">Sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Đơn giá</th>
+                                <th>Thành tiền</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let item of cartItems; let i = index">
+                                <tr>
+                                    <td>
+                                        <div class="product-info">
+                                            <img [src]="item.product.thumbnail" alt="Product Image" class="product-image">
+                                            <span class="product-name">{{ item.product.name }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="qty-control">
+                                            <button (click)="decreaseQuantity(i)">−</button>
+                                            <span>{{ item.quantity }}</span>
+                                            <button (click)="increaseQuantity(i)">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap">
+                                        {{ item.product.price | currency:'VND':'symbol':'1.0-0':'vi' }}
+                                    </td>
+                                    <td class="text-nowrap fw-semibold">
+                                        {{ (item.product.price * item.quantity) | currency:'VND':'symbol':'1.0-0':'vi' }}
+                                    </td>
+                                    <td>
+                                        <button class="btn-remove" (click)="confirmDelete(i)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+
+                    <!-- Order Summary -->
+                    <div class="order-summary">
+                        <div class="summary-row">
+                            <span>Tạm tính</span>
+                            <span>{{ totalAmount | currency:'VND':'symbol':'1.0-0':'vi' }}</span>
+                        </div>
+
+                        <!-- Coupon -->
+                        <div class="coupon-row">
+                            <div class="input-group">
+                                <input type="text" class="form-control coupon-input"
+                                    formControlName="couponCode"
+                                    placeholder="Nhập mã giảm giá">
+                                <button (click)="applyCoupon()" class="btn-apply" type="button">
+                                    Áp dụng
+                                </button>
+                            </div>
+                        </div>
+
+                        @if(couponDiscount > 0) {
+                            <div class="summary-row discount-row">
+                                <span>Giảm giá</span>
+                                <span>−{{ couponDiscount | number:'1.2-2' }}đ</span>
+                            </div>
+                        }
+
+                        <div class="summary-total">
+                            <span>Tổng thanh toán</span>
+                            <span class="total-amount">
+                                {{ totalAmount | currency:'VND':'symbol':'1.0-0':'vi' }}
+                            </span>
+                        </div>
+
+                        <button (click)="placeOrder()" class="btn-place-order" type="button">
+                            <i class="fas fa-check-circle me-2"></i>Đặt hàng ngay
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<app-footer></app-footer>

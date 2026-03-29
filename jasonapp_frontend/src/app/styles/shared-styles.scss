@@ -1,0 +1,47 @@
+// ============================================================
+// JasonShop — Design System Tokens
+// Light Theme: White/Gray body + Purple-Pink accent
+// ============================================================
+
+// Brand Colors
+$primary:        #7F44FF;
+$primary-light:  #9B6BFF;
+$primary-xlight: #EDE7FF;
+$secondary:      #E942B2;
+$gradient:       linear-gradient(135deg, #E942B2 0%, #7F44FF 100%);
+$gradient-hover: linear-gradient(135deg, #d4359e 0%, #6a35e0 100%);
+
+// Background
+$bg-body:        #F4F6FB;
+$bg-card:        #FFFFFF;
+$bg-header:      #FFFFFF;
+$bg-footer:      #1A1A2E;
+
+// Text
+$text-primary:   #1A1A2E;
+$text-secondary: #6B7280;
+$text-muted:     #9CA3AF;
+$text-white:     #FFFFFF;
+
+// Border
+$border-color:   #E5E7EB;
+$border-focus:   #7F44FF;
+
+// Shadows
+$shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.08);
+$shadow-md:      0 4px 16px rgba(0, 0, 0, 0.12);
+$shadow-lg:      0 8px 32px rgba(0, 0, 0, 0.16);
+$shadow-card:    0 2px 12px rgba(127, 68, 255, 0.08);
+
+// Status Colors
+$status-pending:    #F59E0B;
+$status-processing: #3B82F6;
+$status-shipped:    #8B5CF6;
+$status-delivered:  #10B981;
+$status-cancelled:  #EF4444;
+
+// Backward compatibility aliases
+$shopapp-color:            $primary;
+$shopapp-tint-color:       $secondary;
+$shopapp-title-color:      $primary-light;
+$shopapp-background-color: $bg-card;

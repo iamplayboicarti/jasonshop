@@ -1,0 +1,580 @@
+@use '../../styles/shared-styles.scss' as *;
+
+// ── Hero Banner ────────────────────────────────────────────
+.hero-banner {
+    background: $gradient;
+    padding: 4rem 0 3.5rem;
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 500px;
+        height: 500px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -60%;
+        left: -5%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.85rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+
+    span {
+        color: rgba(255, 255, 255, 0.85);
+        display: block;
+    }
+}
+
+.hero-sub {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+    max-width: 480px;
+}
+
+.btn-hero {
+    display: inline-flex;
+    align-items: center;
+    background: #fff;
+    color: $primary;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.75rem;
+    border-radius: 24px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+        color: $primary;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    }
+}
+
+// ── Hero Inner Split Layout ────────────────────────────────
+.hero-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.btn-hero-outline {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 24px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: #fff;
+        color: #fff;
+    }
+}
+
+.trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+
+    i { font-size: 0.75rem; }
+}
+
+.hero-graphic {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-circle-lg {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-circle-sm {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.hero-main-icon {
+    font-size: 4.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    z-index: 1;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.2));
+}
+
+.hero-floating-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 0.5rem 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #1A1A2E;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+    animation: float 3s ease-in-out infinite;
+
+    i { font-size: 0.85rem; }
+}
+
+.hero-card-1 {
+    top: 20px;
+    right: -10px;
+    animation-delay: 0s;
+    i { color: #7F44FF; }
+}
+
+.hero-card-2 {
+    bottom: 30px;
+    left: -10px;
+    animation-delay: 1.5s;
+    i { color: #F59E0B; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+}
+
+// ── Search Section ─────────────────────────────────────────
+.search-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: $shadow-md;
+    margin-top: -2rem;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 2.5rem;
+    align-items: center;
+}
+
+.search-bar {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-muted;
+    font-size: 0.875rem;
+    pointer-events: none;
+}
+
+.search-input {
+    padding-left: 2.5rem !important;
+    border-radius: 10px !important;
+    border: 1.5px solid $border-color !important;
+    height: 44px;
+    font-size: 0.9rem;
+    background: $bg-body !important;
+    color: $text-primary !important;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+        color: $text-muted;
+    }
+
+    &:focus {
+        border-color: $primary !important;
+        background: #fff !important;
+    }
+}
+
+.filter-group {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.product-category {
+    height: 44px;
+    border-radius: 10px !important;
+    border: 1.5px solid $border-color !important;
+    font-size: 0.875rem;
+    color: $text-primary;
+    background: $bg-body;
+    min-width: 180px;
+    cursor: pointer;
+}
+
+.btn-search {
+    height: 44px;
+    padding: 0 1.25rem;
+    background: $gradient;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+
+    &:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+}
+
+// ── Section Header ─────────────────────────────────────────
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+    position: relative;
+    padding-left: 0.875rem;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: $gradient;
+        border-radius: 2px;
+    }
+}
+
+.section-count {
+    font-size: 0.8rem;
+    color: $text-muted;
+    background: $bg-body;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid $border-color;
+}
+
+// ── Product Card ───────────────────────────────────────────
+.product-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    border: 1px solid $border-color;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: $shadow-md;
+
+        .card-overlay {
+            opacity: 1;
+        }
+
+        .product-image {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: $bg-body;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(127, 68, 255, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.btn-quick-view {
+    background: #fff;
+    color: $primary;
+    border: none;
+    border-radius: 20px;
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.card-body {
+    padding: 1rem 1.1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.product-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-description {
+    font-size: 0.8rem;
+    color: $text-muted;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+    margin-bottom: 0.75rem;
+}
+
+.product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.product-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: $primary;
+}
+
+.btn-card-cart {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: $primary-xlight;
+    border: 1.5px solid $primary;
+    color: $primary;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+
+    &:hover {
+        background: $primary;
+        color: #fff;
+        transform: scale(1.1);
+    }
+}
+
+.search-clear {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $text-muted;
+    font-size: 0.75rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s, background 0.15s;
+
+    &:hover {
+        color: $text-primary;
+        background: $bg-body;
+    }
+}
+
+// ── Pagination ─────────────────────────────────────────────
+.pagination {
+    gap: 0.25rem;
+}
+
+.page-link {
+    border-radius: 8px !important;
+    border: 1.5px solid $border-color;
+    color: $text-secondary;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $primary-xlight;
+        border-color: $primary;
+        color: $primary;
+    }
+}
+
+// ── Responsive ─────────────────────────────────────────────
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-graphic {
+        display: none;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .trust-badges {
+        justify-content: center;
+    }
+
+    .search-section {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .product-category {
+        flex: 1;
+    }
+
+    .btn-search {
+        flex: 1;
+    }
+}
+
+@media (max-width: 575px) {
+    .hero-banner {
+        padding: 2.5rem 0 3rem;
+    }
+
+    .col-sm-6 {
+        .product-card {
+            border-radius: 12px;
+        }
+    }
+}

@@ -1,0 +1,99 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand brand-logo" routerLink="/">
+                <span class="brand-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </span>
+                <span class="brand-name">Jason<span class="brand-highlight">Shop</span></span>
+            </a>
+
+            <!-- Mobile toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Nav links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                          [ngClass]="{ 'active': activeNavItem === 0 }"
+                          (click)="setActiveNavItem(0)"
+                          routerLink="/">
+                            <i class="fas fa-home me-1"></i>Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                          [ngClass]="{ 'active': activeNavItem === 1 }"
+                          (click)="setActiveNavItem(1)"
+                          routerLink="/">
+                            <i class="fas fa-bell me-1"></i>Thông báo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cart-link"
+                            [ngClass]="{ 'active': activeNavItem === 2 }"
+                            (click)="setActiveNavItem(2)"
+                            routerLink="/orders">
+                            <span class="cart-icon-wrapper">
+                                <i class="fas fa-shopping-cart"></i>
+                                @if((cartCount$ | async)! > 0) {
+                                    <span class="cart-badge">{{ cartCount$ | async }}</span>
+                                }
+                            </span>
+                            Giỏ hàng
+                        </a>
+                    </li>
+                    <li class="nav-item nav-user">
+                        @if(userResponse) {
+                            <ng-container
+                              [ngbPopover]="popoverContent"
+                              triggers="click"
+                              [placement]="'bottom-end'"
+                            >
+                              <a
+                                class="nav-link user-link"
+                                [ngbPopover]="popoverContent"
+                                (click)="togglePopover($event)"
+                              >
+                                <span class="user-avatar">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <span class="user-name">{{ userResponse.fullname }}</span>
+                                <i class="fas fa-chevron-down ms-1 chevron-icon"></i>
+                              </a>
+                              <ng-template #popoverContent>
+                                <div class="popover-list">
+                                  <a class="popover-item"
+                                      (click)="handleItemClick(0)">
+                                      <i class="fas fa-user-circle me-2"></i>Tài khoản của tôi
+                                  </a>
+                                  <a class="popover-item"
+                                      (click)="handleItemClick(1)">
+                                      <i class="fas fa-box me-2"></i>Đơn mua
+                                  </a>
+                                  <div class="popover-divider"></div>
+                                  <a class="popover-item popover-item--danger"
+                                      (click)="handleItemClick(2)">
+                                      <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                                  </a>
+                                </div>
+                              </ng-template>
+                            </ng-container>
+                        } @else {
+                          <ng-container>
+                            <a class="nav-link btn-login" routerLink="/login">
+                                <i class="fas fa-sign-in-alt me-1"></i>Đăng nhập
+                            </a>
+                          </ng-container>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

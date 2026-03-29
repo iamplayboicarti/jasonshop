@@ -1,0 +1,212 @@
+.dashboard {
+    max-width: 1100px;
+}
+
+.dash-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1A1A2E;
+    margin-bottom: 0.25rem;
+}
+
+.dash-sub {
+    color: #6B7280;
+    font-size: 0.875rem;
+    margin-bottom: 1.75rem;
+}
+
+// ── Loading ────────────────────────────────────────────────
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 0;
+    color: #6B7280;
+    font-size: 0.875rem;
+}
+
+// ── Stat Cards ─────────────────────────────────────────────
+.stat-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    border: 1px solid #E8E8F0;
+    transition: box-shadow 0.2s, transform 0.2s;
+
+    &:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+}
+
+.stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.stat-card--orders .stat-icon  { background: #EDE7FF; color: #7F44FF; }
+.stat-card--products .stat-icon { background: #DCFCE7; color: #16A34A; }
+.stat-card--nav .stat-icon      { background: #FEF3C7; color: #D97706; }
+.stat-card--users .stat-icon    { background: #DBEAFE; color: #2563EB; }
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #1A1A2E;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.78rem;
+    color: #6B7280;
+    margin-top: 0.3rem;
+}
+
+.stat-link {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1A1A2E;
+    text-decoration: none;
+    line-height: 1;
+    display: block;
+
+    &:hover {
+        color: #7F44FF;
+    }
+}
+
+// ── Recent Orders Card ─────────────────────────────────────
+.recent-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #E8E8F0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.recent-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #E8E8F0;
+}
+
+.recent-title {
+    font-weight: 700;
+    color: #1A1A2E;
+    font-size: 0.95rem;
+
+    i { color: #7F44FF; }
+}
+
+.recent-link {
+    font-size: 0.8rem;
+    color: #7F44FF;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover { text-decoration: underline; }
+}
+
+// ── Table ──────────────────────────────────────────────────
+.table {
+    font-size: 0.875rem;
+
+    th {
+        font-weight: 600;
+        color: #6B7280;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0.75rem 1.25rem;
+        border-bottom: 1px solid #E8E8F0;
+        background: #FAFAFA;
+    }
+
+    td {
+        padding: 0.75rem 1.25rem;
+        color: #374151;
+        vertical-align: middle;
+        border-bottom: 1px solid #F3F4F6;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr:hover td {
+        background: #FAFBFF;
+    }
+}
+
+.order-id {
+    font-weight: 600;
+    color: #7F44FF;
+    font-family: monospace;
+}
+
+.order-amount {
+    font-weight: 600;
+    color: #1A1A2E;
+}
+
+.order-date {
+    color: #9CA3AF;
+    font-size: 0.8rem;
+}
+
+.method-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    background: #F3F4F6;
+    color: #374151;
+    letter-spacing: 0.02em;
+}
+
+// ── Status Pills ───────────────────────────────────────────
+.status-pill {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-pending    { background: #FEF3C7; color: #92400E; }
+.status-processing { background: #DBEAFE; color: #1E40AF; }
+.status-shipped    { background: #EDE9FE; color: #5B21B6; }
+.status-delivered  { background: #D1FAE5; color: #065F46; }
+.status-cancelled  { background: #FEE2E2; color: #991B1B; }
+
+// ── Empty State ────────────────────────────────────────────
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem;
+    color: #9CA3AF;
+
+    i {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    p {
+        font-size: 0.875rem;
+        margin: 0;
+    }
+}

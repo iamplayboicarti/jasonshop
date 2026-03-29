@@ -1,0 +1,182 @@
+@use '../../styles/shared-styles.scss' as *;
+
+.site-footer {
+    margin-top: auto;
+}
+
+// ── Main Footer ────────────────────────────────────────────
+.footer-main {
+    background-color: $bg-footer;
+    padding: 3.5rem 0 2.5rem;
+}
+
+// ── Brand Block ────────────────────────────────────────────
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: $gradient;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.footer-logo-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+
+    span {
+        color: $primary-light;
+    }
+}
+
+.footer-tagline {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+}
+
+// ── Social Links ───────────────────────────────────────────
+.social-links {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+        background-color: $secondary;
+        border-color: $secondary;
+        color: #fff;
+    }
+}
+
+// ── Column Headings ────────────────────────────────────────
+.footer-heading {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.1rem;
+    position: relative;
+    padding-bottom: 0.6rem;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 28px;
+        height: 2px;
+        background: $gradient;
+        border-radius: 2px;
+    }
+}
+
+// ── Footer Links ───────────────────────────────────────────
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        margin-bottom: 0.55rem;
+    }
+
+    a {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $secondary;
+        }
+    }
+}
+
+// ── Contact List ───────────────────────────────────────────
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        margin-bottom: 0.75rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.875rem;
+
+        i {
+            color: $primary-light;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+            width: 14px;
+        }
+    }
+}
+
+// ── Bottom Bar ─────────────────────────────────────────────
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 1rem 0;
+
+    p,
+    a {
+        font-size: 0.8125rem;
+        color: rgba(255, 255, 255, 0.45);
+    }
+
+    a {
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $secondary;
+        }
+    }
+}
+
+.footer-sep {
+    margin: 0 0.5rem;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+// ── Responsive ─────────────────────────────────────────────
+@media (max-width: 767px) {
+    .footer-main {
+        padding: 2.5rem 0 1.5rem;
+    }
+
+    .footer-bottom .col-md-6:last-child {
+        margin-top: 0.5rem;
+        text-align: left !important;
+    }
+}

@@ -1,0 +1,176 @@
+@use '../../styles/shared-styles.scss' as *;
+
+.profile-page {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+// ── Sidebar ────────────────────────────────────────────────
+.profile-sidebar {
+    background: $bg-card;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    box-shadow: $shadow-sm;
+    border: 1px solid $border-color;
+    text-align: center;
+}
+
+.avatar-circle {
+    width: 80px;
+    height: 80px;
+    background: $gradient;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: #fff;
+    font-size: 1.75rem;
+    box-shadow: 0 4px 16px rgba(127, 68, 255, 0.3);
+}
+
+.profile-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 0.25rem;
+}
+
+.profile-sub {
+    font-size: 0.8rem;
+    color: $text-muted;
+    margin-bottom: 1.25rem;
+}
+
+.profile-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid $border-color;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-num {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: $primary;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: $text-muted;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 32px;
+    background: $border-color;
+}
+
+// ── Profile Cards ──────────────────────────────────────────
+.profile-card {
+    background: $bg-card;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: $shadow-sm;
+    border: 1px solid $border-color;
+}
+
+.profile-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.875rem;
+    border-bottom: 1px solid $border-color;
+
+    i {
+        color: $primary;
+    }
+}
+
+// ── Form Inputs ────────────────────────────────────────────
+.form-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: $text-secondary;
+    margin-bottom: 0.35rem;
+}
+
+.input-icon-wrap {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-muted;
+    font-size: 0.8rem;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.profile-input {
+    padding-left: 2.5rem !important;
+    border-radius: 10px !important;
+    border: 1.5px solid $border-color !important;
+    height: 44px;
+    font-size: 0.875rem;
+    color: $text-primary;
+    background: $bg-body !important;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+        color: $text-muted;
+    }
+
+    &:focus {
+        border-color: $primary !important;
+        background: #fff !important;
+        box-shadow: 0 0 0 3px rgba(127, 68, 255, 0.1) !important;
+    }
+
+    &.is-invalid {
+        border-color: $status-cancelled !important;
+    }
+}
+
+// ── Save Button ────────────────────────────────────────────
+.btn-save {
+    height: 48px;
+    padding: 0 2rem;
+    background: $gradient;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+
+    &:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+}
+
+// ── Responsive ─────────────────────────────────────────────
+@media (max-width: 767px) {
+    .profile-sidebar {
+        margin-bottom: 0;
+    }
+}

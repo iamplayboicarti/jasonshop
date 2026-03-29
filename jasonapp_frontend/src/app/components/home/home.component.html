@@ -1,0 +1,150 @@
+<app-header></app-header>
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <p class="hero-badge"><i class="fas fa-bolt me-1"></i> Ưu đãi hôm nay</p>
+                <h1>Mua sắm thông minh<br><span>cùng JasonShop</span></h1>
+                <p class="hero-sub">Hàng ngàn sản phẩm chất lượng, giao hàng nhanh toàn quốc</p>
+                <div class="hero-actions">
+                    <a routerLink="/" class="btn-hero">
+                        <i class="fas fa-search me-2"></i>Khám phá ngay
+                    </a>
+                    <a routerLink="/orders" class="btn-hero-outline">
+                        <i class="fas fa-shopping-cart me-2"></i>Giỏ hàng
+                    </a>
+                </div>
+                <div class="trust-badges">
+                    <span class="trust-item"><i class="fas fa-truck"></i> Miễn phí giao hàng</span>
+                    <span class="trust-item"><i class="fas fa-shield-alt"></i> Hàng chính hãng</span>
+                    <span class="trust-item"><i class="fas fa-undo"></i> Đổi trả 7 ngày</span>
+                </div>
+            </div>
+            <div class="hero-graphic" aria-hidden="true">
+                <div class="hero-circle-lg"></div>
+                <div class="hero-circle-sm"></div>
+                <div class="hero-floating-card hero-card-1">
+                    <i class="fas fa-box-open"></i><span>1200+ Sản phẩm</span>
+                </div>
+                <div class="hero-floating-card hero-card-2">
+                    <i class="fas fa-star"></i><span>Đánh giá 4.9★</span>
+                </div>
+                <div class="hero-main-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Search & Filter -->
+<div class="container">
+    <div class="search-section">
+        <div class="search-bar">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control search-input"
+                placeholder="Tìm kiếm sản phẩm..."
+                [(ngModel)]="keyword"
+                (keyup.enter)="searchProducts()">
+            @if(keyword) {
+                <button class="search-clear" (click)="keyword = ''; searchProducts()" title="Xóa tìm kiếm">
+                    <i class="fas fa-times"></i>
+                </button>
+            }
+        </div>
+        <div class="filter-group">
+            <select class="form-select product-category" [(ngModel)]="selectedCategoryId">
+                <option [value]="0">Tất cả danh mục</option>
+                @for(category of categories; track category.name) {
+                    <option [value]="category.id">{{ category.name }}</option>
+                }
+            </select>
+            <button class="btn-search" (click)="searchProducts()">
+                <i class="fas fa-search me-1"></i>Tìm kiếm
+            </button>
+        </div>
+    </div>
+
+    <!-- Section Title -->
+    <div class="section-header">
+        <h2 class="section-title">Sản phẩm nổi bật</h2>
+        <span class="section-count">{{ products.length }} sản phẩm</span>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row g-4">
+        @for(product of products; track product.id) {
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                <div class="product-card" (click)="onProductClick(product.id)">
+                    <div class="product-image-wrapper">
+                        <img [src]="product.url" alt="{{ product.name }}" class="product-image">
+                        <div class="card-overlay">
+                            <button class="btn-quick-view" (click)="onProductClick(product.id)">
+                                <i class="fas fa-eye me-1"></i>Xem nhanh
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="product-name">{{ product.name }}</h3>
+                        <p class="product-description">{{ product.description }}</p>
+                        <div class="product-footer">
+                            <span class="product-price">
+                                {{ product.price | currency:'VND':'symbol':'1.0-0':'vi' }}
+                            </span>
+                            <button class="btn-card-cart"
+                                (click)="addProductToCart($event, product.id)"
+                                title="Thêm vào giỏ hàng">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Pagination -->
+<div class="d-flex justify-content-center mt-4 mb-5">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @if(currentPage > 0) {
+                <li class="page-item">
+                    <a class="page-link" (click)="onPageChange(0)">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
+            @if(currentPage > 0) {
+                <li class="page-item">
+                    <a class="page-link" (click)="onPageChange(currentPage - 1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+            }
+            @for(page of visiblePages; track page) {
+                <ng-container>
+                    <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
+                        <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
+                    </li>
+                </ng-container>
+            }
+            @if(currentPage < totalPages - 1) {
+                <li class="page-item">
+                    <a class="page-link" (click)="onPageChange(currentPage + 1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" (click)="onPageChange(totalPages - 1)">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+<app-footer></app-footer>

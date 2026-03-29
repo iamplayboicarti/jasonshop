@@ -1,0 +1,114 @@
+<app-header></app-header>
+
+<div class="container order-detail-page">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+            <h2>Chi tiết đơn hàng</h2>
+            @if(orderResponse) {
+                <span class="status-badge status-{{ orderResponse.status }}">
+                    {{ orderResponse.status }}
+                </span>
+            }
+        </div>
+        <nav class="breadcrumb-nav">
+            <a routerLink="/">Trang chủ</a>
+            <span class="separator">/</span>
+            <span>Đơn hàng #{{ orderResponse?.id }}</span>
+        </nav>
+    </div>
+
+    @if(orderResponse) {
+        <div class="row g-4">
+
+            <!-- Thông tin người nhận -->
+            <div class="col-lg-5">
+                <div class="info-card">
+                    <div class="info-card-title">
+                        <i class="fas fa-user"></i>
+                        <span>Thông tin người nhận</span>
+                    </div>
+                    <ul class="info-list">
+                        <li>
+                            <span class="info-label"><i class="fas fa-user-circle"></i>Họ và tên</span>
+                            <span class="info-value">{{ orderResponse.fullname }}</span>
+                        </li>
+                        <li>
+                            <span class="info-label"><i class="fas fa-envelope"></i>Email</span>
+                            <span class="info-value">{{ orderResponse.email }}</span>
+                        </li>
+                        <li>
+                            <span class="info-label"><i class="fas fa-phone"></i>Số điện thoại</span>
+                            <span class="info-value">{{ orderResponse.phone_number }}</span>
+                        </li>
+                        <li>
+                            <span class="info-label"><i class="fas fa-map-marker-alt"></i>Địa chỉ</span>
+                            <span class="info-value">{{ orderResponse.address }}</span>
+                        </li>
+                        @if(orderResponse.note) {
+                            <li>
+                                <span class="info-label"><i class="fas fa-sticky-note"></i>Ghi chú</span>
+                                <span class="info-value">{{ orderResponse.note }}</span>
+                            </li>
+                        }
+                        <li>
+                            <span class="info-label"><i class="fas fa-truck"></i>Vận chuyển</span>
+                            <span class="info-value">{{ orderResponse.shipping_method }}</span>
+                        </li>
+                        <li>
+                            <span class="info-label"><i class="fas fa-credit-card"></i>Thanh toán</span>
+                            <span class="info-value">{{ orderResponse.payment_method }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Sản phẩm đã đặt -->
+            <div class="col-lg-7">
+                <div class="info-card">
+                    <div class="info-card-title">
+                        <i class="fas fa-box-open"></i>
+                        <span>Sản phẩm đã đặt</span>
+                    </div>
+
+                    <table class="table order-table">
+                        <thead>
+                            <tr>
+                                <th class="text-start">Sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Đơn giá</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(item of orderResponse.order_details; track item.product.name) {
+                                <tr>
+                                    <td>
+                                        <div class="product-info">
+                                            <img [src]="item.product.thumbnail" alt="Product Image" class="product-image">
+                                            <span class="product-name">{{ item.product.name }}</span>
+                                        </div>
+                                    </td>
+                                    <td>{{ item.number_of_products }}</td>
+                                    <td class="text-nowrap">{{ item.price | currency:'VND':'symbol':'1.0-0':'vi' }}</td>
+                                    <td class="text-nowrap fw-semibold">{{ item.total_money | currency:'VND':'symbol':'1.0-0':'vi' }}</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="order-total">
+                        <span>Tổng thanh toán</span>
+                        <span class="total-value">
+                            {{ orderResponse.total_money | currency:'VND':'symbol':'1.0-0':'vi' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,115 @@
+<div class="dashboard">
+    <div class="dashboard-heading">
+        <h1 class="dash-title">Tổng quan</h1>
+        <p class="dash-sub">Chào mừng trở lại, <strong>{{ userResponse?.fullname }}</strong></p>
+    </div>
+
+    @if(loading) {
+        <div class="loading-state">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Đang tải...</span>
+            </div>
+            <p class="mt-2 text-muted">Đang tải dữ liệu...</p>
+        </div>
+    } @else {
+        <!-- Stats Row -->
+        <div class="row g-3 mb-4">
+            <div class="col-xl-3 col-md-6">
+                <div class="stat-card stat-card--orders">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="stat-body">
+                        <div class="stat-value">{{ stats.totalOrders }}</div>
+                        <div class="stat-label">Tổng đơn hàng</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="stat-card stat-card--products">
+                    <div class="stat-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="stat-body">
+                        <div class="stat-value">{{ stats.totalProducts }}</div>
+                        <div class="stat-label">Tổng sản phẩm</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="stat-card stat-card--nav">
+                    <div class="stat-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="stat-body">
+                        <a routerLink="/admin/categories" class="stat-link">Quản lý danh mục</a>
+                        <div class="stat-label">Thêm / sửa danh mục</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="stat-card stat-card--users">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-body">
+                        <a routerLink="/admin/users" class="stat-link">Quản lý người dùng</a>
+                        <div class="stat-label">Xem danh sách tài khoản</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="recent-card">
+            <div class="recent-header">
+                <span class="recent-title">
+                    <i class="fas fa-clock me-2"></i>Đơn hàng gần đây
+                </span>
+                <a routerLink="/admin/orders" class="recent-link">Xem tất cả →</a>
+            </div>
+
+            @if(recentOrders.length === 0) {
+                <div class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <p>Chưa có đơn hàng nào</p>
+                </div>
+            } @else {
+                <div class="table-responsive">
+                    <table class="table table-sm mb-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Khách hàng</th>
+                                <th>Phương thức</th>
+                                <th>Trạng thái</th>
+                                <th>Tổng tiền</th>
+                                <th>Ngày đặt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(order of recentOrders; track order.id) {
+                                <tr>
+                                    <td class="order-id">#{{ order.id }}</td>
+                                    <td>{{ order.fullname }}</td>
+                                    <td>
+                                        <span class="method-badge">{{ order.payment_method | uppercase }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="status-pill status-{{ order.status }}">{{ order.status }}</span>
+                                    </td>
+                                    <td class="order-amount">
+                                        {{ order.total_money | currency:'VND':'symbol':'1.0-0':'vi' }}
+                                    </td>
+                                    <td class="order-date">
+                                        {{ order.order_date | date:'dd/MM/yyyy' }}
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    }
+</div>

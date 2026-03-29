@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS coupons (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  code VARCHAR(50) NOT NULL,
+  active BOOLEAN NOT NULL DEFAULT true
+);
+
+SELECT COUNT(*) INTO @col1 FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'orders' AND TABLE_SCHEMA = DATABASE() AND COLUMN_NAME = 'coupon_id';
+SET @s1 = IF(@col1 = 0,
+    'ALTER TABLE orders ADD COLUMN coupon_id INT, ADD CONSTRAINT fk_orders_coupon FOREIGN KEY (coupon_id) REFERENCES coupons(id)',
+    'SELECT 1');
+PREPARE stmt FROM @s1; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SELECT COUNT(*) INTO @col2 FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'order_details' AND TABLE_SCHEMA = DATABASE() AND COLUMN_NAME = 'coupon_id';
+SET @s2 = IF(@col2 = 0,
+    'ALTER TABLE order_details ADD COLUMN coupon_id INT, ADD CONSTRAINT fk_order_details_coupon FOREIGN KEY (coupon_id) REFERENCES coupons(id)',
+    'SELECT 1');
+PREPARE stmt FROM @s2; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+CREATE TABLE IF NOT EXISTS coupon_conditions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  coupon_id INT NOT NULL,
+  attribute VARCHAR(255) NOT NULL,
+  operator VARCHAR(10) NOT NULL,
+  value VARCHAR(255) NOT NULL,
+  discount_amount DECIMAL(5, 2) NOT NULL,
+  FOREIGN KEY (coupon_id) REFERENCES coupons(id)
+);

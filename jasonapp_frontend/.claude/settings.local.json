@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.java$\")",
+      "Bash(grep -r \"callback\\\\|webhook\\\\|vnp_Return\\\\|payment-callback\" d:/ecomerce/jasonshop-master/jasonshop-master/jasonapp_backend_java/src --include=*.java)"
+    ]
+  }
+}

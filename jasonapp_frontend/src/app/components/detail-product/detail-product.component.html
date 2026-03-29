@@ -1,0 +1,138 @@
+<app-header></app-header>
+
+<div class="container product-detail-page">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav">
+        <a routerLink="/">Trang chủ</a>
+        <span class="separator">/</span>
+        <span>{{ product?.name }}</span>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Cột ảnh -->
+        <div class="col-md-6">
+            <div class="gallery-card">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @for(image of product?.product_images;
+                            track image.image_url; let i = $index;) {
+                            <div class="carousel-item"
+                                [ngClass]="{'active': i === currentImageIndex}">
+                                <div class="square-image">
+                                    <img [src]="image.image_url" class="product-image" alt="Product Image">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button"
+                        data-bs-target="#carouselExample"
+                        data-bs-slide="prev" (click)="previousImage()">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button"
+                        data-bs-target="#carouselExample"
+                        data-bs-slide="next" (click)="nextImage()">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <!-- Thumbnails -->
+                <div class="thumbnail-container">
+                    @for(image of product?.product_images;
+                        track image.image_url; let i = $index) {
+                        <div class="thumbnail-item"
+                            [ngClass]="{'active': i === currentImageIndex}"
+                            (click)="thumbnailClick(i)">
+                            <img [src]="image.image_url" class="thumbnail-image" alt="Thumbnail">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Cột thông tin -->
+        <div class="col-md-6">
+            <div class="product-info-card">
+                <!-- Badge trạng thái -->
+                <span class="stock-badge">
+                    <i class="fas fa-check-circle me-1"></i>Còn hàng
+                </span>
+
+                <h1 class="product-title">{{ product?.name }}</h1>
+
+                <!-- Rating tĩnh -->
+                <div class="product-rating mb-2">
+                    <span class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </span>
+                    <span class="rating-count">(128 đánh giá)</span>
+                </div>
+
+                <p class="product-desc">{{ product?.description }}</p>
+
+                <div class="price-block">
+                    <span class="price-label">Giá:</span>
+                    <span class="price-value">
+                        {{ product?.price | currency:'VND':'symbol':'1.0-0':'vi' }}
+                    </span>
+                </div>
+
+                <!-- Chọn số lượng -->
+                <div class="quantity-block">
+                    <span class="qty-label">Số lượng:</span>
+                    <div class="quantity-control">
+                        <button class="qty-btn" (click)="decreaseQuantity()">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="text" class="qty-input" [value]="quantity" readonly>
+                        <button class="qty-btn" (click)="increaseQuantity()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="total-block">
+                    <span class="total-label">Thành tiền:</span>
+                    <span class="total-value">
+                        {{ getTotalPrice() | currency:'VND':'symbol':'1.0-0':'vi' }}
+                    </span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="product-actions">
+                    <button class="btn-add-cart" (click)="addToCart()">
+                        <i class="fas fa-cart-plus me-2"></i>Thêm vào giỏ
+                    </button>
+                    <button class="btn-buy-now" (click)="buyNow()">
+                        <i class="fas fa-bolt me-2"></i>Mua ngay
+                    </button>
+                </div>
+
+                <!-- Thông tin giao hàng -->
+                <div class="shipping-info">
+                    <div class="shipping-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Giao hàng toàn quốc — miễn phí từ 300.000đ</span>
+                    </div>
+                    <div class="shipping-item">
+                        <i class="fas fa-undo"></i>
+                        <span>Đổi trả trong 7 ngày</span>
+                    </div>
+                    <div class="shipping-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Hàng chính hãng — bảo hành chính thức</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,162 @@
+<!-- app-header không được import trong component này -->
+<div class="auth-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-6 col-xl-5">
+
+                <!-- Logo -->
+                <div class="auth-logo">
+                    <span class="auth-logo-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </span>
+                    <span class="auth-logo-text">Jason<span>Shop</span></span>
+                </div>
+
+                <div class="auth-card">
+                    <h2 class="auth-title">Tạo tài khoản</h2>
+                    <p class="auth-subtitle">Đăng ký để bắt đầu mua sắm!</p>
+
+                    <form #registerForm="ngForm">
+                        <div class="row g-3">
+                            <!-- Số điện thoại -->
+                            <div class="col-12">
+                                <label class="form-label" for="phoneNumber">Số điện thoại</label>
+                                <div class="input-icon-wrap">
+                                    <i class="fas fa-phone input-icon"></i>
+                                    <input type="text"
+                                        class="form-control auth-input"
+                                        [(ngModel)]="phoneNumber"
+                                        (input)="onPhoneNumberChange()"
+                                        name="phone"
+                                        (focus)="registerForm.form.markAsTouched()"
+                                        placeholder="Nhập số điện thoại"
+                                        required id="phoneNumber">
+                                </div>
+                                @if(phoneNumber.length < 6 && registerForm.form.touched) {
+                                    <p class="field-error">Số điện thoại phải có ít nhất 6 ký tự</p>
+                                }
+                            </div>
+
+                            <!-- Mật khẩu -->
+                            <div class="col-md-6">
+                                <label class="form-label" for="password">Mật khẩu</label>
+                                <div class="password-field input-icon-wrap">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input [type]="showPassword ? 'text' : 'password'"
+                                        [(ngModel)]="password"
+                                        name="password"
+                                        (input)="registerForm.form.markAsTouched(); checkPasswordsMatch()"
+                                        placeholder="Ít nhất 3 ký tự" required
+                                        class="form-control auth-input" id="password">
+                                    <i class="password-toggle fas"
+                                        [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"
+                                        (click)="togglePassword()"></i>
+                                </div>
+                                @if(password.length < 3 && registerForm.form.touched) {
+                                    <p class="field-error">Mật khẩu phải có ít nhất 3 ký tự</p>
+                                }
+                            </div>
+
+                            <!-- Nhập lại mật khẩu -->
+                            <div class="col-md-6">
+                                <label class="form-label" for="retype-password">Nhập lại mật khẩu</label>
+                                <div class="password-field input-icon-wrap">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input [type]="showPassword ? 'text' : 'password'"
+                                        placeholder="Nhập lại mật khẩu"
+                                        [(ngModel)]="retypePassword"
+                                        name="retypePassword"
+                                        (input)="registerForm.form.markAsTouched(); checkPasswordsMatch()"
+                                        required
+                                        class="form-control auth-input" id="retype-password">
+                                    <i class="password-toggle fas"
+                                        [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"
+                                        (click)="togglePassword()"></i>
+                                </div>
+                                @if(registerForm.controls['retypePassword'] &&
+                                    registerForm.controls['retypePassword'].hasError('passwordMismatch')
+                                    && registerForm.form.touched) {
+                                    <p class="field-error">Mật khẩu không khớp</p>
+                                }
+                            </div>
+
+                            <!-- Họ và tên -->
+                            <div class="col-12">
+                                <label class="form-label" for="full-name">Họ và tên</label>
+                                <div class="input-icon-wrap">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text"
+                                        [(ngModel)]="fullName"
+                                        name="fullName"
+                                        class="form-control auth-input" required
+                                        placeholder="Nhập họ và tên"
+                                        id="full-name">
+                                </div>
+                            </div>
+
+                            <!-- Ngày sinh -->
+                            <div class="col-md-6">
+                                <label class="form-label" for="date-of-birth">Ngày sinh</label>
+                                <div class="input-icon-wrap">
+                                    <i class="fas fa-calendar input-icon"></i>
+                                    <input type="date"
+                                        class="form-control auth-input"
+                                        required
+                                        id="date-of-birth"
+                                        [(ngModel)]="dateOfBirth"
+                                        name="dateOfBirth"
+                                        (input)="registerForm.form.markAsTouched(); checkAge()">
+                                </div>
+                                @if(registerForm.controls['dateOfBirth']
+                                    && registerForm.controls['dateOfBirth'].hasError('invalidAge')
+                                    && registerForm.form.touched) {
+                                    <p class="field-error">Bạn chưa đủ 18 tuổi</p>
+                                }
+                            </div>
+
+                            <!-- Địa chỉ -->
+                            <div class="col-md-6">
+                                <label class="form-label" for="address">Địa chỉ</label>
+                                <div class="input-icon-wrap">
+                                    <i class="fas fa-map-marker-alt input-icon"></i>
+                                    <input type="text"
+                                        [(ngModel)]="address"
+                                        name="address"
+                                        class="form-control auth-input"
+                                        placeholder="Địa chỉ của bạn"
+                                        id="address">
+                                </div>
+                            </div>
+
+                            <!-- Checkbox điều khoản -->
+                            <div class="col-12">
+                                <div class="form-check agree-check">
+                                    <input type="checkbox"
+                                        [(ngModel)]="isAccepted"
+                                        name="isAccepted"
+                                        class="form-check-input" id="agree">
+                                    <label class="form-check-label" for="agree">
+                                        Tôi đồng ý với
+                                        <a href="#" class="auth-link">điều khoản và điều kiện</a>
+                                        của JasonShop
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <button type="button" (click)="register()" class="btn-auth-primary mt-3">
+                        <i class="fas fa-user-plus me-2"></i>Tạo tài khoản
+                    </button>
+
+                    <p class="auth-footer-text mt-3">
+                        Đã có tài khoản?
+                        <a href="#" class="auth-link">Đăng nhập ngay</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
