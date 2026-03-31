@@ -69,6 +69,8 @@ The repository is split into two main parts:
 <img width="2282" height="904" alt="Kiến trúc hệ thống ShopApp drawio" src="https://github.com/user-attachments/assets/19e97a98-f423-4747-ae2d-cac526c3bb99" />
 
 ---
+## Database
+<img width="1098" height="591" alt="image" src="https://github.com/user-attachments/assets/f0cb1a41-1433-4c31-a6cb-d4aa18d571ab" />
 
 ## Tech Stack
 
