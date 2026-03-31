@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${api.prefix}/product_images")
-//@Validated
-//Dependency Injection
+
 @RequiredArgsConstructor
 public class ProductImageController {
     private final IProductImageService productImageService;
